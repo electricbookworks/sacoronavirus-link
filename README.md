@@ -19,7 +19,8 @@ This is optional The script includes some optional settings. Add these by also i
 ```html
 <script>
     var sacoronavirusOptions = {
-        color: 'yellow'
+        backgroundColor: '#fff'
+        textColor: '#222'
     }
 </script>
 ```

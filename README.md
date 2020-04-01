@@ -46,6 +46,12 @@ For example, to create a larger, pink tab with purple text 2 rems from the top, 
 </script>
 ```
 
+### Using in WordPress
+
+If you have a WordPress site, there are many ways to add the script tag, depending on how your site is built. The simplest option is often to use a plugin for adding scripts.
+
+We have successfully used the [Header and Footer Scripts plugin](https://wordpress.org/plugins/header-and-footer-scripts/) for this. Install the plugin, and add the tags as described above to the plugin's 'Scripts in footer' box.
+
 ## Contributing
 
 If you have feedback or changes, please log an issue or a pull request.

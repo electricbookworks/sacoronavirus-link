@@ -1,0 +1,26 @@
+{
+  "name": "sacoronavirus-link",
+  "version": "1.0.0",
+  "description": "An easy way to link to South Africa's official COVID-19 website",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^4.0.2"
+  },
+  "devDependencies": {
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electricbookworks/sacoronavirus-link.git"
+  },
+  "author": "Electric Book Works",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/electricbookworks/sacoronavirus-link/issues"
+  },
+  "homepage": "https://github.com/electricbookworks/sacoronavirus-link#readme"
+}

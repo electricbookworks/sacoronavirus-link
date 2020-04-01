@@ -1,31 +1,35 @@
-# Easy links to sacoronavirus.co.za
+# Easy link to sacoronavirus.co.za
 
-To help ensure that South Africans get official, up-to-date information about COVID-19, and to fight fake news and misleading stories, the government has made it compulsory for all domains that end in `.za` to include a visible link to [sacoronavirus.co.za](https://sacoronavirus.co.za) on their landing page.
+To help ensure that South Africans get official, up-to-date information about COVID-19, and to fight fake news and misleading stories, the government has made it compulsory for all domains that end in `.za` to include a visible link to [sacoronavirus.co.za](https://sacoronavirus.co.za) on their landing page. This site is the government's official 'Covid-19 South African Online Portal'.
 
-That can be tricky for many organisations. Here is a quick and easy way to include that link. You do need some technical knowledge to implement it. Once implemented, your site will show a small popup that users can close.
+Modifying a website quickly and elegantly can be tricky. Here is a **quick and easy way to include that link**. You do need some technical knowledge to implement it. Once implemented, your site will show a small popup that users can close. It will stay closed for that visit (or 'session').
 
-## Usage
+This script is tiny (less than 3KB), and does not collect or transmit any data.
 
-Include this line before the `</body>` tag of your home page (or your page templates):
+## To use
+
+Include this line in your site's HTML:
 
 ``` html
-<script src="http://corona.ebw.co/index.js"></script>
+<script src="https://corona.ebw.co/sacoronavirus-link.min.js"></script>
 ```
+
+It's best to place this before the `</body>` tag. To meet the regulations, you only need this on your home page. But if it appears elsewhere, too, that's fine.
 
 ### Options
 
-This is optional The script includes some optional settings. Add these by also including this immediately *before* the `<script>` tag mentioned above:
+Optionally, you can pass colour settings to the script. Add these by including this immediately *before* the `<script>` tag mentioned above:
 
 ```html
 <script>
     var sacoronavirusOptions = {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
         textColor: '#222'
     }
 </script>
 ```
 
-The values there (e.g. `yellow`) are the defaults. You can change them to suit your site, for instance changing the popup's colour to match your site design.
+The values there (e.g. `#fff` for 'white') are the defaults. You can change them to suit your site.
 
 ## Contributing
 

@@ -55,3 +55,5 @@ We have successfully used the [Header and Footer Scripts plugin](https://wordpre
 ## Contributing
 
 If you have feedback or changes, please log an issue or a pull request.
+
+This plugin was created by [Electric Book Works](https://electricbookworks.com) with design by [Hybrid Creative](https://hybridcreative.co.za).

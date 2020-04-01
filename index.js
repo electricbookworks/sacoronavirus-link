@@ -29,6 +29,7 @@ function sacoronavirus() {
         var modal = document.createElement('div');
         modal.id = 'sacoronavirus-notification';
         modal.classList.add('sacoronavirus-link');
+        modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
         document.body.appendChild(modal);
 
         // Position and style modal div
@@ -45,14 +46,18 @@ function sacoronavirus() {
                 'align-items: center;' +
                 'background-color: ' + options.backgroundColor + ';' +
                 'border-radius: 2em 0 0 2em;' +
-                'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
+                'box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);' +
                 'color: ' + options.textColor + ';' +
                 'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
                 'font-size: 0.7rem;' +
                 'height: 2rem;' +
                 'max-width: 80vw;' +
-                'padding-left: 0.4rem;' +
+                'overflow: hidden;' +
                 'width: 10rem;' +
+
+                // Transition
+                'transition-property: width;' +
+                'transition-duration: 0.2s;' +
                 '');
 
         // Add icon
@@ -65,6 +70,7 @@ function sacoronavirus() {
                 'display: flex;' +
                 'font-size: 0.9rem;' +
                 'justify-content: center;' +
+                'margin-left: 0.5em;' +
                 'margin-right: 0.25em;' +
                 'width: 1.3rem;' +
                 'height: 1.3rem;' +
@@ -137,8 +143,8 @@ function sacoronavirus() {
         label.setAttribute('style',
                 'cursor: pointer;' +
                 'display: flex;' +
-                'height: 0.5rem;' +
-                'width: 0.5rem;' +
+                'height: 2rem;' + // more easily clickable
+                'width: 0.5rem;' + // controls size of SVG
                 'position: absolute;' +
                 'right: 0.5rem;' +
                 '');
@@ -148,24 +154,24 @@ function sacoronavirus() {
         closeButton.addEventListener('change', function () {
             var checkbox = event.target;
             if (checkbox.checked) {
-                notification.style.display = 'none';
+                notification.classList.remove('sacoronavirus-notification-visible');
+                notification.classList.add('sacoronavirus-notification-hidden');
+                notification.style.width = '0';
                 storeHiddenStatus(notification);
             }
         });
     }
 
-    // To let users close the modal, make all notifications hideable
+    // To let users close the modal, make notification hideable
     function showHideNotification() {
 
-        var notifications = document.querySelectorAll('[id*="sacoronavirus-notification"]');
-        notifications.forEach(function (notification) {
-            if (hiddenStatus(notification) !== 'hidden') {
-                notification.style.display = 'flex';
-                notification.classList.remove('sacoronavirus-notification-hidden');
-                notification.classList.add('sacoronavirus-notification-visible');
-                enableHidingNotification(notification);
-            }
-        });
+        var notification = document.getElementById('sacoronavirus-notification');
+        if (hiddenStatus(notification) !== 'hidden') {
+            notification.style.display = 'flex';
+            notification.classList.remove('sacoronavirus-notification-hidden');
+            notification.classList.add('sacoronavirus-notification-visible');
+            enableHidingNotification(notification);
+        }
     }
 
     if (document.getElementById('sacoronavirus-notification')) {
@@ -175,5 +181,4 @@ function sacoronavirus() {
     }
 }
 
-// Run our main function after the window loads.
-window.onload = sacoronavirus;
+sacoronavirus();

@@ -148,12 +148,12 @@ function sacoronavirus() {
         label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.58 7.57"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
         label.setAttribute('style',
                 'cursor: pointer;' +
-                'display: flex;' +
-                'height: 2rem;' + // more easily clickable
-                'width: 0.5rem;' + // controls size of SVG
+                'height: 0.5rem;' +
+                'line-height: 0.5;' +
+                'width: 0.5rem;' +
                 'position: absolute;' +
                 'right: 0.5rem;' +
-                'top: 0;' + // required for IE
+                'top: 0.75rem;' + // required for IE
                 '');
         closeButton.insertAdjacentElement('afterend', label);
 

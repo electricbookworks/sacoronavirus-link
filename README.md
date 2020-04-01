@@ -2,7 +2,7 @@
 
 To help ensure that South Africans get official, up-to-date information about COVID-19, and to fight fake news and misleading stories, the government has made it compulsory for all domains that end in `.za` to include a visible link to [sacoronavirus.co.za](https://sacoronavirus.co.za) on their landing page. This site is the government's official 'Covid-19 South African Online Portal'.
 
-Modifying a website quickly and elegantly can be tricky. Here is a **quick and easy way to include that link**. You do need some technical knowledge to implement it. Once implemented, your site will show a small popup that users can close. It will stay closed for that visit (or 'session').
+Modifying a website quickly and elegantly can be tricky. Here is a **quick and easy way to include that link**. You do need some technical knowledge to implement it. Once implemented, your site will show a small tab that users can close. It will stay closed for that visit (or 'session').
 
 This script is tiny (less than 3KB), and does not collect or transmit any data.
 
@@ -18,18 +18,31 @@ It's best to place this before the `</body>` tag. To meet the regulations, you o
 
 ### Options
 
-Optionally, you can pass colour settings to the script. Add these by including this immediately *before* the `<script>` tag mentioned above:
+Optionally, you can pass settings to the script. Add these by including this immediately *before* the `<script>` tag mentioned above:
+
+```html
+<script>
+    var sacoronavirusOptions = {}
+</script>
+```
+
+Then, inside the `{}`, add any of the following options, separated by commas:
+
+- `backgroundColor`: the background colour of the tab (by default, this is white)
+- `textColor`: the colour of the tab's text and icons (by default, this is `#222`, almost black)
+- `top`: if you want to position the tab vertically, the distance from the top of the page (by default, the tab is 1rem from the bottom of the page).
+
+For example, to create a pink tab with purple text 2 ems from the top, you'd add:
 
 ```html
 <script>
     var sacoronavirusOptions = {
-        backgroundColor: '#fff',
-        textColor: '#222'
+        backgroundColor: 'pink',
+        textColor: 'purple',
+        top: '2em'
     }
 </script>
 ```
-
-The values there (e.g. `#fff` for 'white') are the defaults. You can change them to suit your site.
 
 ## Contributing
 

@@ -60,6 +60,12 @@ function sacoronavirus() {
                 'transition-duration: 0.2s;' +
                 '');
 
+        // If options.top is set, move modal
+        if (options.top) {
+            modal.style.bottom = 'auto';
+            modal.style.top = options.top;
+        }
+
         // Add icon
         var icon = document.createElement('span');
         icon.innerHTML = 'i';

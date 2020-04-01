@@ -22,6 +22,9 @@ function sacoronavirus() {
     if (!options.textColor) {
         options.textColor = '#222';
     }
+    if (!options.size) {
+        options.size = '1';
+    }
 
     function addNotification(callback) {
 
@@ -38,7 +41,7 @@ function sacoronavirus() {
                 // Position
                 'display: none;' +
                 'position: fixed;' +
-                'bottom: 1rem;' +
+                'bottom: 1.5em;' +
                 'right: 0;' +
                 'z-index: 1000;' +
 
@@ -49,11 +52,12 @@ function sacoronavirus() {
                 'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
                 'color: ' + options.textColor + ';' +
                 'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
-                'font-size: 0.7rem;' +
-                'height: 2rem;' +
+                'font-size: ' + options.size * 0.8 + 'rem;' +
+                'height: 2.2em;' +
+                'line-height: 1;' +
                 'max-width: 80vw;' +
                 'overflow: hidden;' +
-                'width: 10rem;' +
+                'width: 13em;' +
 
                 // Transition
                 'transition-property: width;' +
@@ -72,14 +76,13 @@ function sacoronavirus() {
         icon.setAttribute('style',
                 'align-items: center;' +
                 'border: 1px solid ' + options.textColor + ';' +
-                'border-radius: 1.3rem;' +
+                'border-radius: 1.3em;' +
                 'display: flex;' +
-                'font-size: 0.9rem;' +
                 'justify-content: center;' +
-                'margin-left: 0.5em;' +
-                'margin-right: 0.25em;' +
-                'width: 1.3rem;' +
-                'height: 1.3rem;' +
+                'margin-left: 0.6em;' +
+                'margin-right: 0.4em;' +
+                'width: 1.3em;' +
+                'height: 1.3em;' +
                 '');
         modal.appendChild(icon);
 
@@ -90,9 +93,8 @@ function sacoronavirus() {
         link.setAttribute('target', '_blank');
         link.setAttribute('style',
                 'color: inherit;' +
-                'line-height: 1.9rem;' +
                 'display: flex;' +
-                'align-self: baseline;' +
+                'height: 1.2em;' + // magic number?
                 '');
         modal.appendChild(link);
 
@@ -145,15 +147,14 @@ function sacoronavirus() {
         // Create a label for the checkbox
         var label = document.createElement('label');
         label.setAttribute('for', notification.id + '--close');
-        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7.58 7.57"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
+        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
         label.setAttribute('style',
                 'cursor: pointer;' +
-                'height: 0.5rem;' +
-                'line-height: 0.5;' +
-                'width: 0.5rem;' +
+                'height: 1em;' +
+                'width: 1em;' +
                 'position: absolute;' +
-                'right: 0.5rem;' +
-                'top: 0.75rem;' + // required for IE
+                'right: 0.5em;' +
+                'top: 0.8em;' + // required for IE
                 '');
         closeButton.insertAdjacentElement('afterend', label);
 

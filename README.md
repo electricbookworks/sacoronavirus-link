@@ -28,18 +28,20 @@ Optionally, you can pass settings to the script. Add these by including this imm
 
 Then, inside the `{}`, add any of the following options, separated by commas:
 
-- `backgroundColor`: the background colour of the tab (by default, this is white)
-- `textColor`: the colour of the tab's text and icons (by default, this is `#222`, almost black)
+- `backgroundColor`: the background colour of the tab (by default, this is white).
+- `size`: a decimal number by which the tab's size should be multiplied to make it bigger or smaller.
+- `textColor`: the colour of the tab's text and icons (by default, this is `#222`, almost black).
 - `top`: if you want to position the tab vertically, the distance from the top of the page (by default, the tab is 1rem from the bottom of the page).
 
-For example, to create a pink tab with purple text 2 ems from the top, you'd add:
+For example, to create a larger, pink tab with purple text 2 rems from the top, you'd add:
 
 ```html
 <script>
     var sacoronavirusOptions = {
         backgroundColor: 'pink',
+        size: '1.5',
         textColor: 'purple',
-        top: '2em'
+        top: '2rem'
     }
 </script>
 ```

@@ -147,6 +147,7 @@ function sacoronavirus() {
                 'width: 0.5rem;' + // controls size of SVG
                 'position: absolute;' +
                 'right: 0.5rem;' +
+                'top: 0;' + // required for IE
                 '');
         closeButton.insertAdjacentElement('afterend', label);
 

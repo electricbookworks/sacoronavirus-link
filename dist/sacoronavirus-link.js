@@ -54,10 +54,12 @@ function sacoronavirus() {
                 'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
                 'font-size: ' + options.size * 0.8 + 'rem;' +
                 'height: 2.2em;' +
+                'justify-content: space-between;' +
                 'line-height: 1;' +
                 'max-width: 80vw;' +
                 'overflow: hidden;' +
-                'width: 13em;' +
+                'min-width: 14em;' +
+                'width: 14em;' +
 
                 // Transition
                 'transition-property: width;' +
@@ -81,6 +83,7 @@ function sacoronavirus() {
                 'justify-content: center;' +
                 'margin-left: 0.6em;' +
                 'margin-right: 0.4em;' +
+                'min-width: 1.3em;' +
                 'width: 1.3em;' +
                 'height: 1.3em;' +
                 '');
@@ -95,6 +98,7 @@ function sacoronavirus() {
                 'color: inherit;' +
                 'display: flex;' +
                 'height: 1.2em;' + // magic number?
+                'margin-right: auto;' + // clever flex-box trick
                 '');
         modal.appendChild(link);
 
@@ -144,17 +148,16 @@ function sacoronavirus() {
                 'display: none;');
         notification.appendChild(closeButton);
 
-        // Create a label for the checkbox
+        // Create a label for the checkbox, the visible 'close button' x
         var label = document.createElement('label');
         label.setAttribute('for', notification.id + '--close');
-        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
+        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="10" width="10" viewBox="0 0 10 10"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
         label.setAttribute('style',
+                'align-items: flex-end;' +
                 'cursor: pointer;' +
+                'display: flex;' +
                 'height: 1em;' +
-                'width: 1em;' +
-                'position: absolute;' +
-                'right: 0.5em;' +
-                'top: 0.8em;' + // required for IE
+                'width: 1.5em;' + // make clickable area wider
                 '');
         closeButton.insertAdjacentElement('afterend', label);
 
@@ -164,6 +167,7 @@ function sacoronavirus() {
             if (checkbox.checked) {
                 notification.classList.remove('sacoronavirus-notification-visible');
                 notification.classList.add('sacoronavirus-notification-hidden');
+                notification.style.minWidth = '0';
                 notification.style.width = '0';
                 storeHiddenStatus(notification);
             }

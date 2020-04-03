@@ -29,16 +29,18 @@ Optionally, you can pass settings to the script. Add these by including this imm
 Then, inside the `{}`, add any of the following options, separated by commas:
 
 - `backgroundColor`: the background colour of the tab (by default, this is white).
+- `font`: the name of the font you want to use by default. The script does not load any fonts, so this should be the name of a font already available on your website.
 - `size`: a decimal number by which the tab's size should be multiplied to make it bigger or smaller.
 - `textColor`: the colour of the tab's text and icons (by default, this is `#222`, almost black).
 - `top`: if you want to position the tab vertically, the distance from the top of the page (by default, the tab is 1rem from the bottom of the page).
 
-For example, to create a larger, pink tab with purple text 2 rems from the top, you'd add:
+For example, to create a larger, pink tab, with a Source Sans Pro font and purple text, 2 rems from the top, you'd add:
 
 ```html
 <script>
     var sacoronavirusOptions = {
         backgroundColor: 'pink',
+        font: 'Source Sans Pro',
         size: '1.5',
         textColor: 'purple',
         top: '2rem'

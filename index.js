@@ -25,6 +25,9 @@ function sacoronavirus() {
     if (!options.size) {
         options.size = '1';
     }
+    if (!options.font) {
+        options.font = '';
+    }
 
     function addNotification(callback) {
 
@@ -51,7 +54,7 @@ function sacoronavirus() {
                 'border-radius: 2em 0 0 2em;' +
                 'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
                 'color: ' + options.textColor + ';' +
-                'font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
+                'font-family: "' + options.font + '", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
                 'font-size: ' + options.size * 0.8 + 'rem;' +
                 'height: 2.2em;' +
                 'justify-content: space-between;' +
@@ -97,7 +100,6 @@ function sacoronavirus() {
         link.setAttribute('style',
                 'color: inherit;' +
                 'display: flex;' +
-                'height: 1.2em;' + // magic number?
                 'margin-right: auto;' + // clever flex-box trick
                 '');
         modal.appendChild(link);
@@ -151,7 +153,7 @@ function sacoronavirus() {
         // Create a label for the checkbox, the visible 'close button' x
         var label = document.createElement('label');
         label.setAttribute('for', notification.id + '--close');
-        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="10" width="10" viewBox="0 0 10 10"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
+        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="' + 10 * options.size + '" width="' + 10 * options.size + '" viewBox="0 0 10 10"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
         label.setAttribute('style',
                 'align-items: flex-end;' +
                 'cursor: pointer;' +

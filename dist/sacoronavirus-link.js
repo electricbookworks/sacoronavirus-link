@@ -100,7 +100,6 @@ function sacoronavirus() {
         link.setAttribute('style',
                 'color: inherit;' +
                 'display: flex;' +
-                // 'height: 1.2em;' + // magic number?
                 'margin-right: auto;' + // clever flex-box trick
                 '');
         modal.appendChild(link);
@@ -196,4 +195,8 @@ function sacoronavirus() {
     }
 }
 
-sacoronavirus();
+if (document.readyState!='loading') {
+    sacoronavirus();
+} else {
+    document.addEventListener('DOMContentLoaded', sacoronavirus);
+}

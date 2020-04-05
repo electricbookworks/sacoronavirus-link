@@ -50,7 +50,9 @@ For example, to create a larger, pink tab, with a Source Sans Pro font and purpl
 
 ### Using in WordPress
 
-If you have a WordPress site, there are many ways to add the script tag, depending on how your site is built. The simplest option is often to use a plugin for adding scripts.
+If you have a WordPress site, this repo also works as a WordPress plugins. Just copy it to your `wp-content/plugins` directory, then activate the plugin in your WordPress admin. If you use the plugin, you cannot configure the script at present.
+
+There are many other ways to add the script tag, depending on how your site is built. The simplest option is often to use a plugin for adding scripts.
 
 We have successfully used the [Header and Footer Scripts plugin](https://wordpress.org/plugins/header-and-footer-scripts/) for this. Install the plugin, and add the tags as described above to the plugin's 'Scripts in footer' box.
 

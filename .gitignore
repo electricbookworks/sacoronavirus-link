@@ -3,3 +3,4 @@ node_modules
 .project
 .php_cs.cache
 .settings/
+build/

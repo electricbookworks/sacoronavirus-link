@@ -2,10 +2,10 @@
 /*
 Plugin Name: SACoronavirus Link Plugin
 Plugin URI: https://github.com/electricbookworks/sacoronavirus-link
-Description: Places SA coronavirus links on wordpress site.
+Description: Implements a link to the the official South Africa government COVID-19 portal on your site.
 Version: 1.0.0
 Author: Electric Book Works / Lateral Alternative CC
-Author URI: https://www.electricbook.works / https://www.lateral.co.za
+Author URI: https://www.lateral.co.za
 License: GPL 3.0
 */
 
@@ -26,7 +26,7 @@ function sacoronavirus_link_get_options()
     $options = get_option('sacoronavirus_link_options');
     $defaults = [
         'backgroundColor' => '#ffffff',
-        'textColor' => '#666666',
+        'textColor' => '#222222',
         'homepage' => is_array($options) && array_key_exists('homepage', $options),
         'top' => '',
         'size' => 1,

@@ -14,7 +14,6 @@ function sacoronavirus() {
     if (typeof sacoronavirusOptions === 'object') {
         options = sacoronavirusOptions;
     }
-
     // Check for each option here, and add default if not found.
     if (!options.backgroundColor) {
         options.backgroundColor = '#fff';
@@ -28,66 +27,112 @@ function sacoronavirus() {
     if (!options.font) {
         options.font = '';
     }
+ 
+    // Split fonts if it's a comma-delimited list of fonts
+    var fonts = options.font.split(',');
+    for (var i=0; i<fonts.length; i++) {
+        fonts[i] = '"' + fonts[i].trim() + '"';
+    }
+    options.font =  fonts.join(',') + ',-apple-system,BlinkMacSystemFont,"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;';
+
+    var textColor = options.textColor;
+    var bgColor = options.backgroundColor;
+    var size = options.size;
+    var font = options.font;
+
+    options.size = (parseFloat(options.size)*0.8) + "rem";
+    if (window.CSS.supports('--fake-var',0)) {
+        textColor = 'var(--text-color)';
+        bgColor = 'var(--background-color)';
+        size = 'var(--size)';
+        font = 'var(--font)';
+    }
 
     function addNotification(callback) {
-
         // Create modal div
         var modal = document.createElement('div');
         modal.id = 'sacoronavirus-notification';
         modal.classList.add('sacoronavirus-link');
         modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
-        document.body.appendChild(modal);
-
-        // Split fonts if it's a comma-delimited list of fonts
-        var fonts = options.font.split(',');
-        for (var i=0; i<fonts.length; i++) {
-            fonts[i] = '"' + fonts[i].trim() + '"';
-        }
-        fonts = fonts.join(',')
-
-        // Position and style modal div
-        modal.setAttribute('style',
-
-                // Position
-                'display: none;' +
-                'position: fixed;' +
-                'bottom: 1.5em;' +
-                'right: 0;' +
-                'z-index: 99999;' +
-
-                // Appearance
-                'align-items: center;' +
-                'background-color: ' + options.backgroundColor + ';' +
-                'border-radius: 2em 0 0 2em;' +
-                'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
-                'color: ' + options.textColor + ';' +
-                'font-family: ' + fonts + ', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
-                'font-size: ' + options.size * 0.8 + 'rem;' +
-                'height: 2.2em;' +
-                'justify-content: space-between;' +
-                'line-height: 1;' +
-                'max-width: 80vw;' +
-                'overflow: hidden;' +
-                'min-width: 14em;' +
-                'width: 14em;' +
-
-                // Transition
-                'transition-property: width;' +
-                'transition-duration: 0.2s;' +
-                '');
-
-        // If options.top is set, move modal
-        if (options.top) {
-            modal.style.bottom = 'auto';
-            modal.style.top = options.top;
-        }
 
         // Add icon
         var icon = document.createElement('span');
+        icon.classList.add('sacoronavirus-icon');
         icon.innerHTML = 'i';
-        icon.setAttribute('style',
+        modal.appendChild(icon);
+
+        // Add text
+        var link = document.createElement('a');
+        link.classList.add('sacoronavirus-link-text');
+        link.href = 'https://sacoronavirus.co.za';
+        link.innerText = 'sacoronavirus.co.za';
+        link.setAttribute('target', '_blank');
+
+        modal.appendChild(link);
+
+        var css = document.createElement('style');
+        var modalCss = 
+        '.sacoronavirus-link { ' + 
+            '--text-color: ' + options.textColor + ';' +
+            '--background-color: ' + options.backgroundColor + ';' +
+            '--font: ' + options.font + ';' +
+            '--size: ' + options.size + ';' +
+
+            // Position
+            'display: none;' +
+            'position: fixed;' +
+            'bottom: 1.5em;' +
+            'right: 0;' +
+            'z-index: 99999;' +
+
+            // Appearance
+            'align-items: center;' +
+            'background-color: ' + bgColor + ';' +
+            'border-radius: 2em 0 0 2em;' +
+            'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
+            'color: ' + textColor + ';' +
+            'font-family: ' + font + ';' +
+            'font-size: ' + size + ';' +
+            'height: 2.2em;' +
+            'justify-content: space-between;' +
+            'line-height: 1;' +
+            'max-width: 80vw;' +
+            'overflow: hidden;' +
+            'min-width: 14em;' +
+            'width: 14em;' +
+
+            // Transition
+            'transition-property: width;' +
+            'transition-duration: 0.2s;';
+        // If options.top is set, move modal
+        if (options.top) {
+            modalCss += "bottom: auto;" +
+                "top: " + options.top +";";
+        }
+        modalCss += '}';
+        var linkCss = 
+            '.sacoronavirus-link-text {' +
+                'color: inherit;' +
+                'display: flex;' +
+                'margin-right: auto;' + // clever flex-box trick
+            '}';
+        var labelCss = '.sacoronavirus-close {' +
+                'align-items: flex-end;' +
+                'cursor: pointer;' +
+                'display: flex;' +
+                'height: 1em;' +
+                'width: 1.5em;' + // make clickable area wider
+                '}' +
+                '.sacoronavirus-close>svg {'+
+                '  width: 1em;' + 
+                '}' +
+                '.sacoronavirus-close>svg>g {' +
+                '  stroke: ' + textColor + ';' +
+                '}';
+        var iconCss = 
+            '.sacoronavirus-icon {' +
                 'align-items: center;' +
-                'border: 1px solid ' + options.textColor + ';' +
+                'border: 1px solid ' + textColor + ';' +
                 'border-radius: 1.3em;' +
                 'display: flex;' +
                 'justify-content: center;' +
@@ -96,20 +141,16 @@ function sacoronavirus() {
                 'min-width: 1.3em;' +
                 'width: 1.3em;' +
                 'height: 1.3em;' +
-                '');
-        modal.appendChild(icon);
+            '}';
+            
+        css.innerText = modalCss + iconCss + linkCss + labelCss;
 
-        // Add text
-        var link = document.createElement('a');
-        link.href = 'https://sacoronavirus.co.za';
-        link.innerText = 'sacoronavirus.co.za';
-        link.setAttribute('target', '_blank');
-        link.setAttribute('style',
-                'color: inherit;' +
-                'display: flex;' +
-                'margin-right: auto;' + // clever flex-box trick
-                '');
-        modal.appendChild(link);
+        if (!document.head.firstElementChild) {
+            document.head.appendChild(css);
+        } else {
+            document.head.insertBefore(css, document.head.firstElementChild);
+        }
+        document.body.appendChild(modal);
 
         callback();
     }
@@ -159,15 +200,12 @@ function sacoronavirus() {
 
         // Create a label for the checkbox, the visible 'close button' x
         var label = document.createElement('label');
+        label.classList.add('sacoronavirus-close')
         label.setAttribute('for', notification.id + '--close');
-        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="' + 10 * options.size + '" width="' + 10 * options.size + '" viewBox="0 0 10 10"> <g fill="none" stroke="' + options.textColor + '" stroke-linecap="round"> <path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/> </g> </svg>';
-        label.setAttribute('style',
-                'align-items: flex-end;' +
-                'cursor: pointer;' +
-                'display: flex;' +
-                'height: 1em;' +
-                'width: 1.5em;' + // make clickable area wider
-                '');
+        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" ' +
+            ' viewBox="0 0 10 10"><g fill="none" ' +
+            ' stroke-linecap="round">' +
+            '<path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/></g></svg>';
         closeButton.insertAdjacentElement('afterend', label);
 
         // Listen for clicks on checkbox

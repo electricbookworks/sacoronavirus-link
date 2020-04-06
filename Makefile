@@ -17,6 +17,7 @@ wordpress:
 		cp $$f $(DEST)/$$f; \
 	done
 	cp README-plugin.md $(DEST)/README.md
+	cp README-plugin.txt $(DEST)/readme.txt
 	pushd $(DESTPARENT); \
 	zip -r ../sacoronavirus-link.zip sacoronavirus-link; \
 	popd

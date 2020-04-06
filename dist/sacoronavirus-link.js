@@ -38,6 +38,13 @@ function sacoronavirus() {
         modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
         document.body.appendChild(modal);
 
+        // Split fonts if it's a comma-delimited list of fonts
+        var fonts = options.font.split(',');
+        for (var i=0; i<fonts.length; i++) {
+            fonts[i] = '"' + fonts[i].trim() + '"';
+        }
+        fonts = fonts.join(',')
+
         // Position and style modal div
         modal.setAttribute('style',
 
@@ -46,7 +53,7 @@ function sacoronavirus() {
                 'position: fixed;' +
                 'bottom: 1.5em;' +
                 'right: 0;' +
-                'z-index: 1000;' +
+                'z-index: 99999;' +
 
                 // Appearance
                 'align-items: center;' +
@@ -54,7 +61,7 @@ function sacoronavirus() {
                 'border-radius: 2em 0 0 2em;' +
                 'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
                 'color: ' + options.textColor + ';' +
-                'font-family: "' + options.font + '", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
+                'font-family: ' + fonts + ', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;' +
                 'font-size: ' + options.size * 0.8 + 'rem;' +
                 'height: 2.2em;' +
                 'justify-content: space-between;' +

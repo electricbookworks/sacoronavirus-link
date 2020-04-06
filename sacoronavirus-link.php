@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: SACoronavirus Link Plugin
+Plugin Name: SACoronavirus Link
 Plugin URI: https://github.com/electricbookworks/sacoronavirus-link
 Description: Implements a link to the the official South Africa government COVID-19 portal on your site.
 Version: 1.0.0

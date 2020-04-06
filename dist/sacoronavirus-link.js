@@ -202,7 +202,7 @@ function sacoronavirus() {
     }
 }
 
-if (document.readyState!='loading') {
+if (document.readyState !== 'loading') {
     sacoronavirus();
 } else {
     document.addEventListener('DOMContentLoaded', sacoronavirus);

@@ -50,7 +50,7 @@ For example, to create a larger, pink tab, with a Source Sans Pro font and purpl
 
 ### Using in WordPress
 
-If you have a WordPress site, this repo also works as a WordPress plugins. Just copy it to your `wp-content/plugins` directory, then activate the plugin in your WordPress admin. If you use the plugin, you cannot configure the script at present.
+If you have a WordPress site, this repo also works as a WordPress plugin. Just copy it to your `wp-content/plugins` directory, then activate the plugin in your WordPress admin. Once the plugin is active, you will have a menu item called 'Coronavirus' that you can use to configure the appearance of the plugin.
 
 There are many other ways to add the script tag, depending on how your site is built. The simplest option is often to use a plugin for adding scripts.
 

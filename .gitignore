@@ -1,1 +1,6 @@
 node_modules
+.buildpath
+.project
+.php_cs.cache
+.settings/
+build/

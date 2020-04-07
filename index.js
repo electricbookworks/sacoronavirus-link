@@ -124,7 +124,8 @@ function sacoronavirus() {
                 'width: 1.5em;' + // make clickable area wider
                 '}' +
                 '.sacoronavirus-close>svg {'+
-                '  width: 1em;' + 
+                '  width: 1em;' +
+                '  height: 0.8em;' + // helps to centre cross in tab
                 '}' +
                 '.sacoronavirus-close>svg>g {' +
                 '  stroke: ' + textColor + ';' +

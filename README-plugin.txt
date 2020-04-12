@@ -44,3 +44,4 @@ Super thanks to Electric Bookworks who developed the popup that this plugin disp
 == Changelog ==
 
 v1.0.1 Rewrite of the javascript widget for cleaner layout and styling.
+v1.0.2 Added border styling to link to prevent styling issue on sites using border-bottom for link hover.

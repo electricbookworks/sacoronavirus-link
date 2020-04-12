@@ -128,9 +128,11 @@ margin-right: auto;
 a.${prefix('link-text')} {
 color: ${textColor};
 text-decoration: none;
+border-width: 0;
 }
 a.${prefix('link-text')}:hover, a.${prefix('link-text')}:active {
 color: ${textColor};
+border-width: 0;
 text-decoration: underline;
 }
 .${prefix('close')} {

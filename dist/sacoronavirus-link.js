@@ -1,247 +1,130 @@
-/*jslint browser */
-/*globals window, sacoronavirusOptions */
+"use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*jslint browser */
+
+/*globals window, sacoronavirusOptions */
 // A script that adds a link to the official South African
 // COVID-19 information website, as required by government regulation
-
 function sacoronavirus() {
-    'use strict';
+  'use strict'; // Initialise our options object.
 
-    // Initialise our options object.
-    var options = {};
+  var options = {};
+  var defaults = {
+    backgroundColor: '#fff',
+    textColor: '#222',
+    size: 1,
+    font: ''
+  }; // If the host page includes options, use those.
 
-    // If the host page includes options, use those.
-    if (typeof sacoronavirusOptions === 'object') {
-        options = sacoronavirusOptions;
+  if ((typeof sacoronavirusOptions === "undefined" ? "undefined" : _typeof(sacoronavirusOptions)) === 'object') {
+    options = sacoronavirusOptions;
+
+    for (var k in defaults) {
+      if (!options.hasOwnProperty(k)) {
+        options[k] = defaults[k];
+      }
     }
-    // Check for each option here, and add default if not found.
-    if (!options.backgroundColor) {
-        options.backgroundColor = '#fff';
-    }
-    if (!options.textColor) {
-        options.textColor = '#222';
-    }
-    if (!options.size) {
-        options.size = '1';
-    }
-    if (!options.font) {
-        options.font = '';
-    }
- 
-    // Split fonts if it's a comma-delimited list of fonts
-    var fonts = options.font.split(',');
-    for (var i=0; i<fonts.length; i++) {
-        fonts[i] = '"' + fonts[i].trim() + '"';
-    }
-    options.font =  fonts.join(',') + ',-apple-system,BlinkMacSystemFont,"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;';
+  } else {
+    options = defaults;
+  } // Split fonts if it's a comma-delimited list of fonts
 
-    var textColor = options.textColor;
-    var bgColor = options.backgroundColor;
-    var size = options.size;
-    var font = options.font;
 
-    options.size = (parseFloat(options.size)*0.8) + "rem";
-    if (window.CSS.supports('--fake-var',0)) {
-        textColor = 'var(--text-color)';
-        bgColor = 'var(--background-color)';
-        size = 'var(--size)';
-        font = 'var(--font)';
-    }
+  var fonts = options.font.split(',');
 
-    function addNotification(callback) {
-        // Create modal div
-        var modal = document.createElement('div');
-        modal.id = 'sacoronavirus-notification';
-        modal.classList.add('sacoronavirus-link');
-        modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
+  for (var i = 0; i < fonts.length; i++) {
+    fonts[i] = '"' + fonts[i].trim() + '"';
+  }
 
-        // Add icon
-        var icon = document.createElement('span');
-        icon.classList.add('sacoronavirus-icon');
-        icon.innerHTML = 'i';
-        modal.appendChild(icon);
+  options.font = fonts.join(',') + ',-apple-system,BlinkMacSystemFont,"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;';
+  var textColor = options.textColor;
+  var bgColor = options.backgroundColor;
+  var size = options.size;
+  var font = options.font;
+  options.size = parseFloat(options.size) * 0.8 + "rem";
 
-        // Add text
-        var link = document.createElement('a');
-        link.classList.add('sacoronavirus-link-text');
-        link.href = 'https://sacoronavirus.co.za';
-        link.innerText = 'sacoronavirus.co.za';
-        link.setAttribute('target', '_blank');
+  if (window.CSS.supports('--t-v', 0)) {
+    textColor = 'var(--text-color)';
+    bgColor = 'var(--background-color)';
+    size = 'var(--size)';
+    font = 'var(--font)';
+  }
 
-        modal.appendChild(link);
+  function prefix(i) {
+    return "sacoronavirus-".concat(i);
+  }
 
-        var css = document.createElement('style');
-        var modalCss = 
-        '.sacoronavirus-link { ' + 
-            '--text-color: ' + options.textColor + ';' +
-            '--background-color: ' + options.backgroundColor + ';' +
-            '--font: ' + options.font + ';' +
-            '--size: ' + options.size + ';' +
+  function setup() {
+    var modalKey = prefix("notification");
+    if (isHidden(modalKey)) return;
+    var modal = document.getElementById(modalKey);
 
-            // Position
-            'display: none;' +
-            'position: fixed;' +
-            'bottom: 1.5em;' +
-            'right: 0;' +
-            'z-index: 99999;' +
-
-            // Appearance
-            'align-items: center;' +
-            'background-color: ' + bgColor + ';' +
-            'border-radius: 2em 0 0 2em;' +
-            'box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);' +
-            'color: ' + textColor + ';' +
-            'font-family: ' + font + ';' +
-            'font-size: ' + size + ';' +
-            'height: 2.2em;' +
-            'justify-content: space-between;' +
-            'line-height: 1;' +
-            'max-width: 80vw;' +
-            'overflow: hidden;' +
-            'min-width: 14em;' +
-            'width: 14em;' +
-
-            // Transition
-            'transition-property: width;' +
-            'transition-duration: 0.2s;';
-        // If options.top is set, move modal
-        if (options.top) {
-            modalCss += "bottom: auto;" +
-                "top: " + options.top +";";
-        }
-        modalCss += '}';
-        var linkCss = 
-            '.sacoronavirus-link-text {' +
-                'color: inherit;' +
-                'display: flex;' +
-                'margin-right: auto;' + // clever flex-box trick
-            '}';
-        var labelCss = '.sacoronavirus-close {' +
-                'align-items: flex-end;' +
-                'cursor: pointer;' +
-                'display: flex;' +
-                'height: 1em;' +
-                'width: 1.5em;' + // make clickable area wider
-                '}' +
-                '.sacoronavirus-close>svg {'+
-                '  width: 1em;' + 
-                '}' +
-                '.sacoronavirus-close>svg>g {' +
-                '  stroke: ' + textColor + ';' +
-                '}';
-        var iconCss = 
-            '.sacoronavirus-icon {' +
-                'align-items: center;' +
-                'border: 1px solid ' + textColor + ';' +
-                'border-radius: 1.3em;' +
-                'display: flex;' +
-                'justify-content: center;' +
-                'margin-left: 0.6em;' +
-                'margin-right: 0.4em;' +
-                'min-width: 1.3em;' +
-                'width: 1.3em;' +
-                'height: 1.3em;' +
-            '}';
-            
-        css.innerText = modalCss + iconCss + linkCss + labelCss;
-
-        if (!document.head.firstElementChild) {
-            document.head.appendChild(css);
-        } else {
-            document.head.insertBefore(css, document.head.firstElementChild);
-        }
-        document.body.appendChild(modal);
-
-        callback();
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = modalKey;
+      modal.classList.add(prefix("link"));
+      modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
+      modal.innerHTML = "<span class=\"".concat(prefix('icon'), "\">i</span>\n    <a class=\"").concat(prefix('link-text'), "\" href=\"https://sacoronavirus.co.za\" target=\"_blank\">sacoronavirus.co.za</a>\n    <div class=\"").concat(prefix('close'), "\">\n    <svg viewBox=\"0 0 10 10\"><g fill=\"none\" stroke-linecap=\"round\">\n    <path d=\"M2 8L8 2M2 2L8 8\"/></g></svg>\n    </div>");
+      document.body.appendChild(modal);
     }
 
-    // Check for sessionStorage support
-    function storageSupport() {
-        if (window.localStorage
-                && Storage !== 'undefined') {
-            return true;
-        }
-    }
+    var closeDiv = modal.querySelector("." + prefix('close'));
 
-    // Get a notification's hidden status
-    function hiddenStatus(notification) {
-        if (storageSupport() === true) {
-            var status = sessionStorage.getItem(notification.id);
-            return status;
-        }
-    }
-
-    // Save a notification's hidden status
-    function storeHiddenStatus(notification) {
-        if (storageSupport() === true) {
-            sessionStorage.setItem(notification.id, 'hidden');
-        }
-    }
-
-    // Add a hide button and listen for hiding clicks
-    function enableHidingNotification(notification) {
-
-        // Hide if already hidden in this session
-        if (hiddenStatus(notification) === 'hidden') {
-            notification.style.display = 'none';
-            notification.classList.add('sacoronavirus-notification-hidden');
-            notification.classList.remove('sacoronavirus-notification-visible');
-        }
-
-        // Create a close button
-        var closeButton = document.createElement('input');
-        closeButton.type = 'checkbox';
-        closeButton.name = notification.id + '--close';
-        closeButton.id = notification.id + '--close';
-        closeButton.classList.add('sacoronavirus-notification-close');
-        closeButton.setAttribute('style',
-                'display: none;');
-        notification.appendChild(closeButton);
-
-        // Create a label for the checkbox, the visible 'close button' x
-        var label = document.createElement('label');
-        label.classList.add('sacoronavirus-close')
-        label.setAttribute('for', notification.id + '--close');
-        label.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" ' +
-            ' viewBox="0 0 10 10"><g fill="none" ' +
-            ' stroke-linecap="round">' +
-            '<path d="M.5.5l6.58 6.57M7.07.5L.5 7.07"/></g></svg>';
-        closeButton.insertAdjacentElement('afterend', label);
-
-        // Listen for clicks on checkbox
-        closeButton.addEventListener('change', function () {
-            var checkbox = event.target;
-            if (checkbox.checked) {
-                notification.classList.remove('sacoronavirus-notification-visible');
-                notification.classList.add('sacoronavirus-notification-hidden');
-                notification.style.minWidth = '0';
-                notification.style.width = '0';
-                storeHiddenStatus(notification);
-            }
-        });
-    }
-
-    // To let users close the modal, make notification hideable
-    function showHideNotification() {
-
-        var notification = document.getElementById('sacoronavirus-notification');
-        if (hiddenStatus(notification) !== 'hidden') {
-            notification.style.display = 'flex';
-            notification.classList.remove('sacoronavirus-notification-hidden');
-            notification.classList.add('sacoronavirus-notification-visible');
-            enableHidingNotification(notification);
-        }
-    }
-
-    if (document.getElementById('sacoronavirus-notification')) {
-        showHideNotification();
+    if (!closeDiv) {
+      console.log("failed to find sacoronavirus-link close button");
     } else {
-        addNotification(showHideNotification);
+      modal.addEventListener('transitionend', function () {
+        modal.remove();
+      });
+      closeDiv.addEventListener('click', function (evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        modal.classList.add('closing');
+        storeHidden(modalKey);
+      });
     }
+
+    var cssElement = document.createElement('style');
+    var css = ".".concat(prefix('link'), " {\n--text-color: ").concat(options.textColor, ";\n--background-color: ").concat(options.backgroundColor, ";\n--font: ").concat(options.font, ";\n--size: ").concat(options.size, ";\ndisplay: flex;\nposition: fixed;\nbottom: 1.5em;\nright: 0;\nz-index: 9999;\nalign-items:center;\njustify-content: space-between;\nbackground-color: ").concat(bgColor, ";\nborder-radius: 2em 0 0 2em;\nbox-shadow: 0 0 10px rgba(0, 0, 0, 0.3);\ncolor: ").concat(textColor, ";\nfont-family: ").concat(font, ";\nfont-size: ").concat(size, ";\nheight: 2.2em;\nline-height: 1;\nmax-width: 80vw;\noverflow: hidden;\nmin-width: 14em;\nwidth: 14em;\ntransition: width 0.2s ease-in;\n"); // If options.top is set, move modal
+
+    if (options.top) {
+      css += "bottom: auto; top: ".concat(options.top, ";");
+    }
+
+    css += "}\n.".concat(prefix('link'), ".closing {\nwidth:0;\nmin-width: 0;\n}        \n.").concat(prefix('link-text'), " {\ncolor: inherit;\ndisplay: flex;\nmargin-right: auto;\n}\na.").concat(prefix('link-text'), " {\ncolor: ").concat(textColor, ";\ntext-decoration: none;\n}\na.").concat(prefix('link-text'), ":hover, a.").concat(prefix('link-text'), ":active {\ncolor: ").concat(textColor, ";\ntext-decoration: underline;\n}\n.").concat(prefix('close'), " {\nalign-items: flex-end;\ncursor: pointer;\ndisplay: flex;\nheight: 1em;\nwidth: 1.5em;\n}\n.").concat(prefix('close'), ">svg {\nwidth: 1em;\n}\n.").concat(prefix('close'), ">svg>g {\nstroke: ").concat(textColor, ";\n}\n.").concat(prefix('icon'), " {\nalign-items: center;\nborder: 1px solid ").concat(textColor, ";\nborder-radius: 20em;\ndisplay: flex;\njustify-content: center;\nmargin-left: 0.6em;\nmargin-right: 0.4em;\nmin-width: 1.3em;\nwidth: 1.3em;\nheight: 1.3em;\n}");
+    cssElement.innerHTML = css;
+
+    if (!document.head.firstElementChild) {
+      document.head.appendChild(cssElement);
+    } else {
+      document.head.insertBefore(cssElement, document.head.firstElementChild);
+    }
+  } // Check for sessionStorage support
+
+
+  function storageSupport() {
+    if (window.localStorage && Storage !== 'undefined') {
+      return true;
+    }
+  }
+
+  function isHidden(key) {
+    if (!storageSupport()) return false;
+    return sessionStorage.getItem(key);
+  }
+
+  function storeHidden(key) {
+    if (storageSupport()) {
+      sessionStorage.setItem(key, true);
+    }
+  }
+
+  setup();
 }
 
 if (document.readyState !== 'loading') {
-    sacoronavirus();
+  sacoronavirus();
 } else {
-    document.addEventListener('DOMContentLoaded', sacoronavirus);
+  document.addEventListener('DOMContentLoaded', sacoronavirus);
 }

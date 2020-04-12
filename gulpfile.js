@@ -5,20 +5,10 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename');
 
-function dist(callback) {
-    'use strict';
-
-    gulp.src('index.js')
-        .pipe(rename('sacoronavirus-link.js'))
-        .pipe(gulp.dest('./dist'));
-    callback();
-}
-
 function minify(callback) {
     'use strict';
-
-    gulp.src('index.js')
-        .pipe(uglify({compress: {drop_console: true}}).on('error', function (e) {
+    gulp.src('dist/index.js')
+        .pipe(uglify({compress: {drop_console: false}}).on('error', function (e) {
             console.log(e);
         }))
         .pipe(rename('sacoronavirus-link.min.js'))
@@ -26,4 +16,4 @@ function minify(callback) {
     callback();
 }
 
-exports.default = gulp.parallel(dist, minify);
+exports.default = gulp.parallel(minify);

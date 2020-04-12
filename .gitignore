@@ -4,3 +4,6 @@ node_modules
 .php_cs.cache
 .settings/
 build/
+index.html
+web.go
+svnrepo/

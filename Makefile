@@ -43,7 +43,7 @@ wordpress: js
 	mkdir tmp || true
 	rm -rf tmp/sacoronavirus-link || true
 	cp -R $(DEST)/trunk tmp/sacoronavirus-link
-	rm ../sacoronavirus-link.zip || true
+	rm sacoronavirus-link.zip || true
 	pushd tmp; \
 	zip -r ../sacoronavirus-link.zip sacoronavirus-link; \
 	popd

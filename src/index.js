@@ -5,6 +5,33 @@
 // COVID-19 information website, as required by government regulation
 function sacoronavirus() {
     'use strict';
+
+    function isHidden(key) {
+        if (!storageSupport()) return false;
+        return sessionStorage.getItem(key);
+    }
+    function prefix(i) {
+        return `sacoronavirus-${i}`;
+    }
+    // Check for sessionStorage support
+    function storageSupport() {
+        if (window.localStorage
+                && Storage !== 'undefined') {
+            return true;
+        }
+    }
+    function storeHidden(key) {
+        if (storageSupport()) {
+            sessionStorage.setItem(key, true);
+        }
+    }     
+
+    // Determine whether we are showing on this page at all.
+    var modalKey = prefix(`notification`);
+    if (isHidden(modalKey)) {
+        return;
+    }
+
     // Initialise our options object.
     var options = {};
     var defaults = {
@@ -24,6 +51,15 @@ function sacoronavirus() {
         }
     } else {
         options = defaults;
+    }
+
+    // check that top, if present, has an associated unit
+    if (options.hasOwnProperty('top')) {
+        let t = options['top'].trim();
+        if (/^[\d\.]*$/.test(t)) {
+            t = t + `em`;
+        }
+        options[`top`] = t;
     }
 
     // Split fonts if it's a comma-delimited list of fonts
@@ -46,45 +82,37 @@ function sacoronavirus() {
         font = 'var(--font)';
     }
 
-    function prefix(i) {
-        return `sacoronavirus-${i}`;
+    var modal = document.getElementById(modalKey);
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = modalKey;
+        modal.classList.add(prefix(`link`));
+        modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
+
+        modal.innerHTML = `<span class="${prefix('icon')}">i</span>
+<a class="${prefix('link-text')}" href="https://sacoronavirus.co.za" target="_blank">sacoronavirus.co.za</a>
+<div class="${prefix('close')}">
+<svg viewBox="0 0 10 10"><g fill="none" stroke-linecap="round">
+<path d="M2 8L8 2M2 2L8 8"/></g></svg>
+</div>`;
+        document.body.appendChild(modal);
+    }
+    var closeDiv = modal.querySelector(`.` + prefix('close'));
+    if (!closeDiv) {
+        console.log(`failed to find sacoronavirus-link close button`);
+    } else {
+        modal.addEventListener('transitionend', function() {
+            modal.remove();
+        });
+        closeDiv.addEventListener('click', function(evt) {
+            evt.preventDefault(); evt.stopPropagation();
+            modal.classList.add('closing');
+            storeHidden(modalKey);
+        });
     }
 
-    function setup() {
-        var modalKey = prefix(`notification`);
-        if (isHidden(modalKey)) return;
-
-        var modal = document.getElementById(modalKey);
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = modalKey;
-            modal.classList.add(prefix(`link`));
-            modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
-
-            modal.innerHTML = `<span class="${prefix('icon')}">i</span>
-    <a class="${prefix('link-text')}" href="https://sacoronavirus.co.za" target="_blank">sacoronavirus.co.za</a>
-    <div class="${prefix('close')}">
-    <svg viewBox="0 0 10 10"><g fill="none" stroke-linecap="round">
-    <path d="M2 8L8 2M2 2L8 8"/></g></svg>
-    </div>`;
-            document.body.appendChild(modal);
-        }
-        var closeDiv = modal.querySelector(`.` + prefix('close'));
-        if (!closeDiv) {
-            console.log(`failed to find sacoronavirus-link close button`);
-        } else {
-            modal.addEventListener('transitionend', function() {
-                modal.remove();
-            });
-            closeDiv.addEventListener('click', function(evt) {
-                evt.preventDefault(); evt.stopPropagation();
-                modal.classList.add('closing');
-                storeHidden(modalKey);
-            });
-        }
-
-        var cssElement = document.createElement('style');
-        var css = 
+    var cssElement = document.createElement('style');
+    var css = 
 `.${prefix('link')} {
 --text-color: ${options.textColor};
 --background-color: ${options.backgroundColor};
@@ -94,7 +122,7 @@ display: flex;
 position: fixed;
 bottom: 1.5em;
 right: 0;
-z-index: 9999;
+z-index: 999999;
 align-items:center;
 justify-content: space-between;
 background-color: ${bgColor};
@@ -111,11 +139,11 @@ min-width: 14em;
 width: 14em;
 transition: width 0.2s ease-in;
 `;
-        // If options.top is set, move modal
-        if (options.top) {
-            css += `bottom: auto; top: ${options.top};`;
-        }
-        css += `}
+    // If options.top is set, move modal
+    if (options.top) {
+        css += `bottom: auto; top: ${options.top};`;
+    }
+    css += `}
 .${prefix('link')}.closing {
 width:0;
 min-width: 0;
@@ -160,32 +188,13 @@ min-width: 1.3em;
 width: 1.3em;
 height: 1.3em;
 }`
-       cssElement.innerHTML = css;
+   cssElement.innerHTML = css;
 
-        if (!document.head.firstElementChild) {
-            document.head.appendChild(cssElement);
-        } else {
-            document.head.insertBefore(cssElement, document.head.firstElementChild);
-        }
+    if (!document.head.firstElementChild) {
+        document.head.appendChild(cssElement);
+    } else {
+        document.head.insertBefore(cssElement, document.head.firstElementChild);
     }
-
-    // Check for sessionStorage support
-    function storageSupport() {
-        if (window.localStorage
-                && Storage !== 'undefined') {
-            return true;
-        }
-    }
-    function isHidden(key) {
-        if (!storageSupport()) return false;
-        return sessionStorage.getItem(key);
-    }
-    function storeHidden(key) {
-        if (storageSupport()) {
-            sessionStorage.setItem(key, true);
-        }
-    }
-    setup(); 
 }
 
 if (document.readyState !== 'loading') {

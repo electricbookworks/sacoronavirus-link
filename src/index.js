@@ -56,7 +56,7 @@ function sacoronavirus() {
     // check that top, if present, has an associated unit
     if (options.hasOwnProperty('top')) {
         let t = options['top'].trim();
-        if (/^[\d\.]*$/.test(t)) {
+        if (/^[\d\.]+$/.test(t)) {
             t = t + `em`;
         }
         options[`top`] = t;
@@ -91,10 +91,10 @@ function sacoronavirus() {
 
         modal.innerHTML = `<span class="${prefix('icon')}">i</span>
 <a class="${prefix('link-text')}" href="https://sacoronavirus.co.za" target="_blank">sacoronavirus.co.za</a>
-<div class="${prefix('close')}">
+<button class="${prefix('close')}">
 <svg viewBox="0 0 10 10"><g fill="none" stroke-linecap="round">
 <path d="M2 8L8 2M2 2L8 8"/></g></svg>
-</div>`;
+</button>`;
         document.body.appendChild(modal);
     }
     var closeDiv = modal.querySelector(`.` + prefix('close'));
@@ -164,6 +164,10 @@ border-width: 0;
 text-decoration: underline;
 }
 .${prefix('close')} {
+border:0;
+background-color: transparent;
+margin: 0;
+padding: 0;
 align-items: flex-end;
 cursor: pointer;
 display: flex;

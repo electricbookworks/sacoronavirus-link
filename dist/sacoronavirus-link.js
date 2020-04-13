@@ -64,7 +64,7 @@ function sacoronavirus() {
   if (options.hasOwnProperty('top')) {
     var t = options['top'].trim();
 
-    if (/^[\d\.]*$/.test(t)) {
+    if (/^[\d\.]+$/.test(t)) {
       t = t + "em";
     }
 
@@ -99,7 +99,7 @@ function sacoronavirus() {
     modal.id = modalKey;
     modal.classList.add(prefix("link"));
     modal.setAttribute('title', 'Up-to-date, official information on COVID-19');
-    modal.innerHTML = "<span class=\"".concat(prefix('icon'), "\">i</span>\n<a class=\"").concat(prefix('link-text'), "\" href=\"https://sacoronavirus.co.za\" target=\"_blank\">sacoronavirus.co.za</a>\n<div class=\"").concat(prefix('close'), "\">\n<svg viewBox=\"0 0 10 10\"><g fill=\"none\" stroke-linecap=\"round\">\n<path d=\"M2 8L8 2M2 2L8 8\"/></g></svg>\n</div>");
+    modal.innerHTML = "<span class=\"".concat(prefix('icon'), "\">i</span>\n<a class=\"").concat(prefix('link-text'), "\" href=\"https://sacoronavirus.co.za\" target=\"_blank\">sacoronavirus.co.za</a>\n<button class=\"").concat(prefix('close'), "\">\n<svg viewBox=\"0 0 10 10\"><g fill=\"none\" stroke-linecap=\"round\">\n<path d=\"M2 8L8 2M2 2L8 8\"/></g></svg>\n</button>");
     document.body.appendChild(modal);
   }
 
@@ -126,7 +126,7 @@ function sacoronavirus() {
     css += "bottom: auto; top: ".concat(options.top, ";");
   }
 
-  css += "}\n.".concat(prefix('link'), ".closing {\nwidth:0;\nmin-width: 0;\n}        \n.").concat(prefix('link-text'), " {\ncolor: inherit;\ndisplay: flex;\nmargin-right: auto;\n}\na.").concat(prefix('link-text'), " {\ncolor: ").concat(textColor, ";\ntext-decoration: none;\nborder-width: 0;\n}\na.").concat(prefix('link-text'), ":hover, a.").concat(prefix('link-text'), ":active {\ncolor: ").concat(textColor, ";\nborder-width: 0;\ntext-decoration: underline;\n}\n.").concat(prefix('close'), " {\nalign-items: flex-end;\ncursor: pointer;\ndisplay: flex;\nheight: 1em;\nwidth: 1.5em;\n}\n.").concat(prefix('close'), ">svg {\nwidth: 1em;\n}\n.").concat(prefix('close'), ">svg>g {\nstroke: ").concat(textColor, ";\n}\n.").concat(prefix('icon'), " {\nalign-items: center;\nborder: 1px solid ").concat(textColor, ";\nborder-radius: 20em;\ndisplay: flex;\njustify-content: center;\nmargin-left: 0.6em;\nmargin-right: 0.4em;\nmin-width: 1.3em;\nwidth: 1.3em;\nheight: 1.3em;\n}");
+  css += "}\n.".concat(prefix('link'), ".closing {\nwidth:0;\nmin-width: 0;\n}        \n.").concat(prefix('link-text'), " {\ncolor: inherit;\ndisplay: flex;\nmargin-right: auto;\n}\na.").concat(prefix('link-text'), " {\ncolor: ").concat(textColor, ";\ntext-decoration: none;\nborder-width: 0;\n}\na.").concat(prefix('link-text'), ":hover, a.").concat(prefix('link-text'), ":active {\ncolor: ").concat(textColor, ";\nborder-width: 0;\ntext-decoration: underline;\n}\n.").concat(prefix('close'), " {\nborder:0;\nbackground-color: transparent;\nmargin: 0;\npadding: 0;\nalign-items: flex-end;\ncursor: pointer;\ndisplay: flex;\nheight: 1em;\nwidth: 1.5em;\n}\n.").concat(prefix('close'), ">svg {\nwidth: 1em;\n}\n.").concat(prefix('close'), ">svg>g {\nstroke: ").concat(textColor, ";\n}\n.").concat(prefix('icon'), " {\nalign-items: center;\nborder: 1px solid ").concat(textColor, ";\nborder-radius: 20em;\ndisplay: flex;\njustify-content: center;\nmargin-left: 0.6em;\nmargin-right: 0.4em;\nmin-width: 1.3em;\nwidth: 1.3em;\nheight: 1.3em;\n}");
   cssElement.innerHTML = css;
 
   if (!document.head.firstElementChild) {

@@ -3,7 +3,7 @@
 Plugin Name: SACoronavirus Link
 Plugin URI: https://github.com/electricbookworks/sacoronavirus-link
 Description: Implements a link to the the official South Africa government COVID-19 portal on your site.
-Version: 1.0.3
+Version: 1.0.6
 Author: Electric Book Works / Lateral Alternative CC
 Author URI: https://www.lateral.co.za
 License: GPL 3.0
@@ -14,7 +14,7 @@ function sacoronavirus_link_wp_enqueue_scripts()
     $settings = sacoronavirus_link_get_js_settings();
     if ((!$settings['homepage']) || (is_home())) {
         $url = plugins_url().'/'.basename(dirname(__FILE__)).'/';
-        wp_enqueue_script('sacoronavirus-link', $url.'/dist/sacoronavirus-link.js');
+        wp_enqueue_script('sacoronavirus-link', $url.'/dist/sacoronavirus-link.min.js');
         wp_localize_script('sacoronavirus-link', 'sacoronavirusOptions', $settings);
     }
 }

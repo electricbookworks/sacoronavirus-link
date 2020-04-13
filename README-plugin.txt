@@ -46,4 +46,6 @@ Super thanks to Electric Bookworks who developed the popup that this plugin disp
 v1.0.1 Rewrite of the javascript widget for cleaner layout and styling.
 v1.0.2 Added border styling to link to prevent styling issue on sites using border-bottom for link hover.
 v1.0.3 Fixed scrolling issue, and added units to 'top' value when given without units.
-
+v1.0.4 Fixed distribution error in 1.0.3
+v1.0.5 Fixed issue when top not defined
+v1.0.6 Widget uses button for close for accessibility

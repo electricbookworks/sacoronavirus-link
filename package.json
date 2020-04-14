@@ -1,26 +1,31 @@
 {
-  "name": "sacoronavirus-link",
-  "version": "1.0.0",
-  "description": "An easy way to link to South Africa's official COVID-19 website",
-  "main": "index.js",
+  "author": "Electric Book Works",
+  "bugs": {
+    "url": "https://github.com/electricbookworks/sacoronavirus-link/issues"
+  },
   "dependencies": {
     "gulp": "^4.0.2"
   },
+  "description": "An easy way to link to South Africa's official COVID-19 website",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
     "gulp-rename": "^2.0.0",
-    "gulp-uglify": "^3.0.2"
+    "gulp-uglify": "^3.0.2",
+    "uglify-js": "^3.8.1"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "homepage": "https://github.com/electricbookworks/sacoronavirus-link#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "sacoronavirus-link",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/electricbookworks/sacoronavirus-link.git"
   },
-  "author": "Electric Book Works",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/electricbookworks/sacoronavirus-link/issues"
+  "scripts": {
+    "build": "babel ./src/index.js --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "homepage": "https://github.com/electricbookworks/sacoronavirus-link#readme"
+  "version": "1.0.0"
 }

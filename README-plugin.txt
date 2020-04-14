@@ -1,4 +1,4 @@
-=== sacoronavirus-link ===
+=== Coronavirus Link for South Africa .co.za Websites ===
 Contributors: craigmj
 Author: The Lateral Alternative / Electric Book Works
 Donate link: https://paypal.me/craigmj
@@ -49,3 +49,4 @@ v1.0.3 Fixed scrolling issue, and added units to 'top' value when given without 
 v1.0.4 Fixed distribution error in 1.0.3
 v1.0.5 Fixed issue when top not defined
 v1.0.6 Widget uses button for close for accessibility
+v1.0.7 Close button keeps background-transparent

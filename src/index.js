@@ -174,6 +174,9 @@ display: flex;
 height: 1em;
 width: 1.5em;
 }
+.${prefix('close')}:hover {
+background-color: transparent;
+}
 .${prefix('close')}>svg {
 width: 1em;
 }
